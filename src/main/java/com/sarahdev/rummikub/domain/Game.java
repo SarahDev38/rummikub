@@ -25,6 +25,10 @@ public class Game {
 
 	private List<Card> stockCards;
 
+	// plateau de jeu
+	private Boolean[][] sets = new Boolean[8][13];
+	private Boolean[][] sequences = new Boolean[13][8];
+
 	public Game() {
 		for (int i = 0; i < GameController.MAX_PLAYERS; i++) {
 			names.add("");

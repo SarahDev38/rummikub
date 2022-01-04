@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link th:href="@{/styles/style.css}" rel="stylesheet" />
+<title>Rummikub</title>
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="m-5">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
+		style="padding-left: 100px;">
+		<a class="navbar-brand " href="#"> Jeu de Rummikub - identifier
+			les joueurs</a>
+	</nav>
+
+	<div>
+		<div class="row">
+			<div class="col">&nbsp;</div>
+		</div>
+
+		<form action="#" th:action="@{/players}" th:object="${form}"
+			method="post">
+
+			<div class="row">
+				<div class="col">&nbsp;</div>
+			</div>
+			<div th:if="${message_erreur ne null}">
+				<span th:text="${message_erreur}" class="badge  bg-danger">
+					message </span>
+			</div>
+
+			<table>
+				<tbody>
+					<tr th:each="name, nameStats : *{names}">
+						<td th:if="${nameStats.index} lt ${playersCount}"><input
+							name="*{names[__${nameStats.index}__]}" type="text"
+							th:field="*{names[__${nameStats.index}__]}"
+							placeholder="nom du joueur" class="form-control" th:classappend="${message_erreur ne null} ? error : ''"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="row">
+				<div class="col-2"></div>
+				<div class="col-1 text-center">
+					<div th:if="${playersCount} le 3">
+						<button type="submit" class="btn btn-primary btn-floating round"
+							name="addPlayer">
+							<i class="fa fa-plus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="col-1 text-center">
+					<div th:if="${playersCount} ge 3">
+						<button type="submit" class="btn btn-danger btn-floating round"
+							name="supressPlayer">
+							<i class="fa fa-close"></i>
+						</button>
+					</div>
+				</div>
+				<div class="col">
+					<button name="start" type="submit" class="btn btn-primary ">démarrer</button>
+				</div>
+			</div>
+		</form>
+
+		<span th:text="${playersCount}" class="badge  bg-secondary">
+			players count </span>
+
+	</div>
+
+	<script type="text/javascript"
+		th:src="@{webjars/jquery/3.6.0/jquery.slim.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+</body>
+</html>

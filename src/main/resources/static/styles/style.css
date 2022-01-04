@@ -1,0 +1,11 @@
+h2 {
+	text-transform: uppercase;
+}
+
+button.round {
+	border-radius: 20px;
+}
+
+input.error{
+	color : red;
+}

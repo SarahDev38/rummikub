@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Rummikub</title>
+<link th:href="@{/styles/style.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" th:src="@{/js/dragAndDrop.js}"></script>
+</head>
+
+<body class="m-5">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
+		style="padding-left: 20px;">
+		<a class="navbar-brand " href="#"> Jeu de Rummikub - je démarre la
+			partie </a>
+	</nav>
+
+	<div>
+		<form action="#" th:action="@{/play}" th:object="${form}"
+			method="post">
+
+			<div class="row">
+				<div class="col">&nbsp;</div>
+			</div>
+
+			<table>
+				<tbody>
+					<tr>
+						<td th:each="name, nameStats : *{names}" class="col-2">
+							<h2>
+								<span th:text="${name}" class="badge bg-secondary"
+									th:style="${nameStats.index} eq ${current} ? 'color: orange;' : 'color: white'">
+									nom </span>
+							</h2>
+						</td>
+						<td class="col">
+							<button type="submit" class="btn btn-success round"
+								name="nextPlayer">
+								<i class="fa fa-chevron-right"></i>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="row">
+				<div class="col">&nbsp;</div>
+			</div>
+
+			<table class="col-8">
+				<tbody>
+					<tr>
+						<td th:each="card, cardStats : *{currentCards}">
+							<div>
+								<button type="button" class="btn btn-floating"
+									th:classappend="${card[0]} eq 0 ? 'btn-info' : (${card[0]} eq 1 ? 'btn-warning' : (${card[0]} eq 2 ? 'btn-danger' : 'btn-secondary'))"
+									name="${card[1]}+1" th:text="${card[1]}+1"></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="col">
+				<p>
+					<span th:text="${cardsCount}"> nombre de cartes </span>
+				</p>
+			</div>
+
+			<div class="row">
+				<div class="col">&nbsp;</div>
+			</div>
+
+		</form>
+	</div>
+
+	<script type="
+		text/javascript"
+		th:src="@{webjars/jquery/3.6.0/jquery.slim.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
